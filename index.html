@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Rali</title>
+    <!-- Google Fonts & Font Awesome CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-purple: #8A2BE2;
+            --dark-purple: #4B0082;
+            --neon-purple: #a855f7;
+            --light-purple: #f3e8ff;
+            --bg-dark: #0f0a1c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animasi Bola Cahaya Latar Belakang */
+        .bg-glow {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--primary-purple) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.6;
+            animation: pulseGlow 6s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -50px;
+            left: -50px;
+        }
+
+        .bg-glow-2 {
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 3s;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Kartu Utama Payment Rali */
+        .card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 24px;
+            padding: 35px 25px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                        0 0 30px rgba(138, 43, 226, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header Title */
+        .card-header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .card-header p.subtitle {
+            color: var(--light-purple);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #d8b4fe, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Latar Belakang Putih Khusus QRIS */
+        .qris-box {
+            position: relative;
+            background-color: #ffffff; /* Latar belakang putih bersih */
+            padding: 20px;
+            border-radius: 16px;
+            display: inline-block;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+            margin: 15px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .qris-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 35px rgba(168, 85, 247, 0.9);
+        }
+
+        .qris-img {
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* Garis Animasi Scan QRIS */
+        .scanner-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-purple), #ffffff, var(--primary-purple), transparent);
+            box-shadow: 0 0 15px var(--primary-purple);
+            animation: scan 2.5s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            50% { top: 96%; }
+            100% { top: 0%; }
+        }
+
+        /* Detail Informasi Toko */
+        .qris-info {
+            background: rgba(138, 43, 226, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-top: 15px;
+        }
+
+        .qris-info h2 {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Badge Status */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #4ade80;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Efek Cahaya Latar Belakang -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Container Utama -->
+    <div class="card">
+        <div class="card-header">
+            <h1>Payment Rali</h1>
+            <p class="subtitle">SCAN QRIS DI BAWAH UNTUK MELAKUKAN TRANSAKSI</p>
+        </div>
+
+        <!-- Box QRIS dengan Latar Belakang Putih -->
+        <div class="qris-box">
+            <div class="scanner-line"></div>
+            <!-- Ganti nama file gambar di bawah sesuai nama gambar Anda -->
+            <img src="https://files.catbox.moe/ci2o2b.jpeg" alt="QRIS Toko Kelontong Abeng" class="qris-img">
+        </div>
+
+        <!-- Info Nama QR -->
+        <div class="qris-info">
+            <h2>NAMA QR : TOKO KELONTONG RALI,KIOS</h2>
+        </div>
+
+        <!-- Indicator Live Payment -->
+        <div class="badge">
+            <span class="dot"></span> Screnshoot Aja Trus Scan
+        </div>
+
+        <div class="footer-text">
+            &copy; Payment Rali • Aman & Terpercaya
+        </div>
+    </div>
+
+</body>
+</html>
